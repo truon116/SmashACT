@@ -1,32 +1,65 @@
 <!DOCTYPE html>
 <html>
-<meta charset="UTF-8">
+<!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+<!--Let browser know website is optimized for mobile-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<!-- JQuery Smooth Scroll -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="https://github.com/kswedberg/jquery-smooth-scroll/blob/master/jquery.smooth-scroll.min.js"></script>
-<script>
-$('.smooth').on('click', function() {
-    $.smoothScroll({
-        scrollElement: $('body'),
-        scrollTarget: '#' + this.id
-    });
-    
-    return false;
-});
-</script>
 
 <body>
 
 <!-- Navigation -->
-<div id="nav">
-     <ul>
-         <li><a href="#theory">Theory</a></li>
-         <li><a href="#learn">Learn</a></li>
-         <li><a href="#practice">Practice</a></li>
-	 <li><a href="#test">Test</a></li>
-</div>
+<header id="header" class="scrollspy" style="min-height:100vh">
+	<div class="slider" style="position:absolute;">
+		<ul class="slides">
+			<li>
+			  <img src="https://www.oxfordlearning.com/wp-content/uploads/2009/05/tips-for-easier-studying-860x420.jpg">
+			    <div class="caption left-align">
+				<h3>Left Aligned Caption</h3>
+				<h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+			    </div>
+			</li>
+			<li>
+			  <img src="http://www.heysigmund.com/wp-content/uploads/Studying-9-Scientifically-Proven-Ways-to-Supercharge-Your-Learning.jpg">
+			    <div class="caption right-align">
+				<h3>Right Aligned Caption</h3>
+				<h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+			    </div>
+			</li>
+			<li>
+			  <img src="http://www.sph.umn.edu/sphrb/wp-content/uploads/2014/05/campus-mall.jpg">
+			    <div class="caption center-align">
+			      <h3>This is our big Tagline!</h3>
+			      <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+			    </div>
+			</li>
+		</ul>
+	</div>
+	<div class="caption center-align" style="position:absolute;bottom: 20vh;z-index:2;width:100%">
+	  <h3 class="light grey-text text-lighten-3">Fixed Position Caption</h3>
+	  <h5 class="light grey-text text-lighten-3">Pretend the solid colors are actually pictures/video</h5>
+	</div>
+	<nav id="nav-top" class="white-text">
+		<div class="nav-wrapper container"> 
+		<a href="#header" class="brand-logo">#service_name</a>
+		<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+			<ul class="right right hide-on-med-and-down">
+				<li><a href="#content1">#content1</a></li>
+				<li><a href="#content2">#content2</a></li>
+				<li><a href="#sample">#sample</a></li>
+				<li><a href="#pricing">#pricing</a></li>
+			</ul>
+		</div>
+	</nav>	
+		<ul class="side-nav" id="mobile-demo" style="z-index:998">
+			<li><a href="#header">#service_name</a></li>
+			<li><a href="#content1">#content1</a></li>
+			<li><a href="#content2">#content2</a></li>
+			<li><a href="#sample">#sample</a></li>
+			<li><a href="#pricing">#pricing</a></li>
+		</ul>
+</header>
 
 <!-- Theory -->
 <div id="theory">
@@ -77,4 +110,63 @@ al·go·rithm: a process or set of rules to be followed in calculations or other
 </footer>
 	
 </body>
+<!-- JQuery Smooth Scroll -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://github.com/kswedberg/jquery-smooth-scroll/blob/master/jquery.smooth-scroll.min.js"></script>
+<script>
+$('.smooth').on('click', function() {
+    $.smoothScroll({
+        scrollElement: $('body'),
+        scrollTarget: '#' + this.id
+    });
+    
+    return false;
+});
+
+<!-- Scrollspy?? -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<!-- Compiled and minified JavaScript -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+		<script>
+			$( document ).ready(function() {
+				$('#nav-top').pushpin({ top: window.innerHeight / 2 });
+				$('.question-wrapper').pushpin({ top: $('#quiz').offset().top, bottom: $('#quiz').offset().top + $('#quiz').height() - $('.question-wrapper').height() - $('#nav-top').height() + 750,offset: $('#nav-top').height() });
+
+				$('.scrollspy').scrollSpy({ scrollOffset:$('#nav-top').height() });
+				$('.scrollspy2').scrollSpy({ scrollOffset: 0, throttle:10 }).on('scrollSpy:enter', function() { 			
+					if( $('.question-wrapper .active').position()) {
+						offset = $('.question-wrapper .active').position().top;
+						maxHeight = $('#quiz').offset().top + $('#quiz').height() - $(window).scrollTop() - $('#nav-top').height();
+						console.log(maxHeight);
+						$('.question-wrapper').animate({ maxHeight: maxHeight  }, {duration: 200, queue: false, easing: 'easeOutCubic'});
+						$('.question-wrapper > ul').animate({ top: -offset  }, {duration: 200, queue: false, easing: 'easeOutCubic'});
+					}
+				}).on('scrollSpy:exit', function() { 			
+					if( $('.question-wrapper .active').position()) {
+						offset = $('.question-wrapper .active').position().top;
+						maxHeight = $('#quiz').offset().top + $('#quiz').height() - $(window).scrollTop() - $('#nav-top').height();
+						console.log(maxHeight);
+						$('.question-wrapper').animate({ maxHeight: maxHeight  }, {duration: 200, queue: false, easing: 'easeOutCubic'});
+						$('.question-wrapper > ul').animate({ top: -offset }, {duration: 200, queue: false, easing: 'easeOutCubic'});
+					}
+				});
+				
+				console.log($('.scrollspy2').scrollSpy());
+				$(".button-collapse").sideNav({ closeOnClick: true});
+				$('.slider').slider({
+					height: window.innerHeight,
+					indicators: false
+				});
+				$('.slider').slider('prev');
+				$('.slider').slider('next');
+				var options = [{
+					selector: '#content1', offset: 400, callback: function(e) {
+						Materialize.showStaggeredList('#staggered-facts');
+						Materialize.showStaggeredList('#staggered-quotes');
+					}
+				}];
+			   Materialize.scrollFire(options);
+			});
+</script>
 </html>
