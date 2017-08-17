@@ -7,6 +7,82 @@
 <!--Let browser know website is optimized for mobile-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<style>
+		.section {
+			}
+
+			
+			.pin-top {
+				background-color: transparent;
+				color: black;
+				box-shadow: none;
+			}
+		
+			nav {
+				transition: color .2s, background-color .2s;
+				position:absolute;
+				top:0;
+				z-index: 2;
+			}
+			
+			ul#staggered-facts li {
+				opacity: 0;
+			}
+			
+			ul#staggered-quotes li {
+				opacity: 0;
+			}
+			
+			.question::before {
+				content: attr(data-question-number)")";
+				position: absolute;
+				font-size: 120%;
+				transform: translate(-300%, 50%);
+			}	
+			
+			.answers li::before {
+				content: attr(data-answer-letter);
+			}
+			
+			.passage a {
+				color: inherit;
+			}
+			
+			.passage a:hover {
+				color: #039be5;
+			}
+			
+			#sample a.active {
+				color: #8e24aa
+			}
+			
+			.passage-sentence::before {
+				content: "["attr(data-sentence-number)"]";
+			}	
+			
+			.passage-phrase {
+				position: relative;
+				text-decoration: underline;
+			}
+			
+			.passage-phrase::after {
+				content: attr(data-phrase-number);
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, 70%);
+				font-size: 50%;
+			}
+			
+			.question {
+				padding-left: 100px;
+			}
+
+
+
+
+</style>
+
 <body>
 
 <!-- Navigation -->
